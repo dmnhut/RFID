@@ -1547,7 +1547,7 @@ public class frmMain extends javax.swing.JFrame {
         this.dalChangePassword.setEnabled(true);
         this.dalChangePassword.setSize(this.dalChangePassword.getPreferredSize());
         this.dalChangePassword.setTitle("ĐỔI MẬT KHẨU");
-        this.dalChangePassword.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("check-in.png")));
+        this.dalChangePassword.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("checked.png")));
     }//GEN-LAST:event_btnChangePasswordActionPerformed
 
     private void txtFindEventsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindEventsKeyReleased
