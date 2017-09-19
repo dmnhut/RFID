@@ -2,12 +2,9 @@ package form;
 
 import com.alee.laf.WebLookAndFeel;
 import java.awt.Toolkit;
-import java.sql.ResultSet;
-import javax.swing.JFrame;
+import javafx.stage.FileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import model.User;
 
 /**
@@ -66,6 +63,7 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        fileChooser = new javax.swing.JFileChooser();
         dalChangePassword = new javax.swing.JDialog();
         pnl = new javax.swing.JPanel();
         lblOldPassword = new javax.swing.JLabel();
@@ -76,6 +74,14 @@ public class frmMain extends javax.swing.JFrame {
         txtChangePasswordRepeat = new javax.swing.JPasswordField();
         btnChangePasswordAgree = new javax.swing.JButton();
         btnChangePasswordCancel = new javax.swing.JButton();
+        dalAddEventsFromExcel = new javax.swing.JDialog();
+        pnlEventsFromExcel = new javax.swing.JPanel();
+        cboEventsFromExcel = new javax.swing.JComboBox<>();
+        btnOpenImportExcel4Events = new javax.swing.JButton();
+        dalMakeNewCardFromExcel = new javax.swing.JDialog();
+        pnlAccountFromExcel = new javax.swing.JPanel();
+        cboAccountFromExcel = new javax.swing.JComboBox<>();
+        btnOpenImportExcel4Account = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         tabbedPaneMain = new javax.swing.JTabbedPane();
         pnlCheckin = new javax.swing.JPanel();
@@ -99,6 +105,9 @@ public class frmMain extends javax.swing.JFrame {
         lblAddEvents = new javax.swing.JLabel();
         lblSavedEvents = new javax.swing.JLabel();
         lblDeleteEvents = new javax.swing.JLabel();
+        lbltextEvents0 = new javax.swing.JLabel();
+        lbltextEvents1 = new javax.swing.JLabel();
+        lbltextEvents2 = new javax.swing.JLabel();
         pnlAccount = new javax.swing.JPanel();
         txtFindAccount = new javax.swing.JTextField();
         cboAccount = new javax.swing.JComboBox<>();
@@ -108,6 +117,9 @@ public class frmMain extends javax.swing.JFrame {
         lblAddAcount = new javax.swing.JLabel();
         lblSavedAcount = new javax.swing.JLabel();
         lblDeleteAcount = new javax.swing.JLabel();
+        lbltextAccount0 = new javax.swing.JLabel();
+        lbltextAccount1 = new javax.swing.JLabel();
+        lbltextAccount2 = new javax.swing.JLabel();
         pnlAdmin = new javax.swing.JPanel();
         tabbedPaneSub = new javax.swing.JTabbedPane();
         pnlInfo4Admin = new javax.swing.JPanel();
@@ -190,6 +202,8 @@ public class frmMain extends javax.swing.JFrame {
         mnuCreateNewEventsFromExcel = new javax.swing.JMenuItem();
         mnuMakeNewCard = new javax.swing.JMenu();
         mnuMakeNewCardFromExcel = new javax.swing.JMenuItem();
+
+        fileChooser.setCurrentDirectory(new java.io.File("C:\\Users"));
 
         dalChangePassword.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -282,8 +296,119 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         dalChangePassword.getContentPane().add(pnl, gridBagConstraints);
 
+        dalAddEventsFromExcel.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                dalAddEventsFromExcelWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                dalAddEventsFromExcelWindowClosing(evt);
+            }
+        });
+
+        cboEventsFromExcel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cboEventsFromExcel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày Hội Việc Làm 2017", "Tuần lễ Khám phá Tri thức", "Giao lưu với CLB CEO phần mềm Quang Trung" }));
+
+        btnOpenImportExcel4Events.setText("Chọn");
+        btnOpenImportExcel4Events.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenImportExcel4EventsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlEventsFromExcelLayout = new javax.swing.GroupLayout(pnlEventsFromExcel);
+        pnlEventsFromExcel.setLayout(pnlEventsFromExcelLayout);
+        pnlEventsFromExcelLayout.setHorizontalGroup(
+            pnlEventsFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEventsFromExcelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEventsFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboEventsFromExcel, 0, 388, Short.MAX_VALUE)
+                    .addGroup(pnlEventsFromExcelLayout.createSequentialGroup()
+                        .addComponent(btnOpenImportExcel4Events)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlEventsFromExcelLayout.setVerticalGroup(
+            pnlEventsFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEventsFromExcelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboEventsFromExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnOpenImportExcel4Events)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dalAddEventsFromExcelLayout = new javax.swing.GroupLayout(dalAddEventsFromExcel.getContentPane());
+        dalAddEventsFromExcel.getContentPane().setLayout(dalAddEventsFromExcelLayout);
+        dalAddEventsFromExcelLayout.setHorizontalGroup(
+            dalAddEventsFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlEventsFromExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dalAddEventsFromExcelLayout.setVerticalGroup(
+            dalAddEventsFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlEventsFromExcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        dalMakeNewCardFromExcel.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                dalMakeNewCardFromExcelWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                dalMakeNewCardFromExcelWindowClosing(evt);
+            }
+        });
+
+        cboAccountFromExcel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cboAccountFromExcel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinh viên", "Cán bộ" }));
+
+        btnOpenImportExcel4Account.setText("Chọn");
+        btnOpenImportExcel4Account.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenImportExcel4AccountActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAccountFromExcelLayout = new javax.swing.GroupLayout(pnlAccountFromExcel);
+        pnlAccountFromExcel.setLayout(pnlAccountFromExcelLayout);
+        pnlAccountFromExcelLayout.setHorizontalGroup(
+            pnlAccountFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAccountFromExcelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAccountFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboAccountFromExcel, 0, 388, Short.MAX_VALUE)
+                    .addGroup(pnlAccountFromExcelLayout.createSequentialGroup()
+                        .addComponent(btnOpenImportExcel4Account)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlAccountFromExcelLayout.setVerticalGroup(
+            pnlAccountFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAccountFromExcelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboAccountFromExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnOpenImportExcel4Account)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dalMakeNewCardFromExcelLayout = new javax.swing.GroupLayout(dalMakeNewCardFromExcel.getContentPane());
+        dalMakeNewCardFromExcel.getContentPane().setLayout(dalMakeNewCardFromExcelLayout);
+        dalMakeNewCardFromExcelLayout.setHorizontalGroup(
+            dalMakeNewCardFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlAccountFromExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dalMakeNewCardFromExcelLayout.setVerticalGroup(
+            dalMakeNewCardFromExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlAccountFromExcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         tabbedPaneMain.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -483,6 +608,30 @@ public class frmMain extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -520,6 +669,12 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
+        lbltextEvents0.setText("Thêm mới");
+
+        lbltextEvents1.setText("Sao lưu");
+
+        lbltextEvents2.setText("Xóa");
+
         javax.swing.GroupLayout pnlUpdate4EventsLayout = new javax.swing.GroupLayout(pnlUpdate4Events);
         pnlUpdate4Events.setLayout(pnlUpdate4EventsLayout);
         pnlUpdate4EventsLayout.setHorizontalGroup(
@@ -529,7 +684,15 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(pnlUpdate4EventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDeleteEvents)
                     .addComponent(lblSavedEvents)
-                    .addComponent(lblAddEvents))
+                    .addComponent(lblAddEvents)
+                    .addGroup(pnlUpdate4EventsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(pnlUpdate4EventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbltextEvents1)
+                            .addComponent(lbltextEvents0)
+                            .addGroup(pnlUpdate4EventsLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lbltextEvents2)))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnlUpdate4EventsLayout.setVerticalGroup(
@@ -537,11 +700,17 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(pnlUpdate4EventsLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(lblAddEvents)
-                .addGap(101, 101, 101)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbltextEvents0)
+                .addGap(73, 73, 73)
                 .addComponent(lblSavedEvents)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbltextEvents1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDeleteEvents)
-                .addGap(112, 112, 112))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbltextEvents2)
+                .addGap(84, 84, 84))
         );
 
         javax.swing.GroupLayout pnlEventsLayout = new javax.swing.GroupLayout(pnlEvents);
@@ -586,6 +755,29 @@ public class frmMain extends javax.swing.JFrame {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -603,6 +795,7 @@ public class frmMain extends javax.swing.JFrame {
         scrollPane4Account.setViewportView(tblAccount);
 
         lblAddAcount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
+        lblAddAcount.setToolTipText("");
         lblAddAcount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAddAcountMouseClicked(evt);
@@ -613,16 +806,30 @@ public class frmMain extends javax.swing.JFrame {
 
         lblDeleteAcount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
 
+        lbltextAccount0.setText("Thêm mới");
+
+        lbltextAccount1.setText("Sao lưu");
+
+        lbltextAccount2.setText("Xóa");
+
         javax.swing.GroupLayout pnlUpdate4AccountLayout = new javax.swing.GroupLayout(pnlUpdate4Account);
         pnlUpdate4Account.setLayout(pnlUpdate4AccountLayout);
         pnlUpdate4AccountLayout.setHorizontalGroup(
             pnlUpdate4AccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUpdate4AccountLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(pnlUpdate4AccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDeleteAcount)
                     .addComponent(lblSavedAcount)
-                    .addComponent(lblAddAcount))
+                    .addComponent(lblAddAcount)
+                    .addGroup(pnlUpdate4AccountLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(pnlUpdate4AccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbltextAccount1)
+                            .addComponent(lbltextAccount0)
+                            .addGroup(pnlUpdate4AccountLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lbltextAccount2)))))
                 .addGap(32, 32, 32))
         );
         pnlUpdate4AccountLayout.setVerticalGroup(
@@ -630,11 +837,17 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(pnlUpdate4AccountLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(lblAddAcount)
-                .addGap(101, 101, 101)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbltextAccount0)
+                .addGap(79, 79, 79)
                 .addComponent(lblSavedAcount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbltextAccount1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDeleteAcount)
-                .addGap(114, 114, 114))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbltextAccount2)
+                .addGap(92, 92, 92))
         );
 
         javax.swing.GroupLayout pnlAccountLayout = new javax.swing.GroupLayout(pnlAccount);
@@ -1374,20 +1587,30 @@ public class frmMain extends javax.swing.JFrame {
 
         MenuBar.add(mnuFile);
 
-        mnuCreateNewEvents.setText("Tạo mới sự kiện");
+        mnuCreateNewEvents.setText("Sự kiện");
         mnuCreateNewEvents.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         mnuCreateNewEventsFromExcel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        mnuCreateNewEventsFromExcel.setText("Thêm sự kiện từ danh sách Excel");
+        mnuCreateNewEventsFromExcel.setText("Thêm danh sách tham gia sự kiện từ file Excel");
+        mnuCreateNewEventsFromExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCreateNewEventsFromExcelActionPerformed(evt);
+            }
+        });
         mnuCreateNewEvents.add(mnuCreateNewEventsFromExcel);
 
         MenuBar.add(mnuCreateNewEvents);
 
-        mnuMakeNewCard.setText("Đăng ký thẻ");
+        mnuMakeNewCard.setText("Đăng ký thẻ mới");
         mnuMakeNewCard.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         mnuMakeNewCardFromExcel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        mnuMakeNewCardFromExcel.setText("Đăng ký thẻ từ danh sách Excel");
+        mnuMakeNewCardFromExcel.setText("Thêm danh sách đăng ký thẻ từ file Excel");
+        mnuMakeNewCardFromExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMakeNewCardFromExcelActionPerformed(evt);
+            }
+        });
         mnuMakeNewCard.add(mnuMakeNewCardFromExcel);
 
         MenuBar.add(mnuMakeNewCard);
@@ -1560,7 +1783,7 @@ public class frmMain extends javax.swing.JFrame {
         this.tabbedPaneSub.setSelectedComponent(pnlCreateNewEvents4Admin);
     }//GEN-LAST:event_lblAddEventsMouseClicked
 
-    public void resetTextStudent(){
+    public void resetTextStudent() {
         txtStudentCardClass.setText("");
         txtStudentCardCodeID.setText("");
         txtStudentCardCollege.setText("");
@@ -1569,12 +1792,12 @@ public class frmMain extends javax.swing.JFrame {
         txtStudentCardRFID.setText("");
         cboSchoolYear.setSelectedIndex(0);
     }
-    
+
     private void btnCancelStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelStudentActionPerformed
         resetTextStudent();
     }//GEN-LAST:event_btnCancelStudentActionPerformed
 
-    public void resetTextEmployer(){
+    public void resetTextEmployer() {
         txtEmployerCardCodeID.setText("");
         txtEmployerCardDepartment.setText("");
         txtEmployerCardEmail.setText("");
@@ -1615,7 +1838,7 @@ public class frmMain extends javax.swing.JFrame {
             TableModel.setColumnIdentifiers(colsName);
             TableModel.setNumRows(10);
             tblAccount.setModel(TableModel);
-        }else{
+        } else {
             TableModel = new DefaultTableModel();
             String[] colsName = {"MÃ SỐ", "HỌ VÀ TÊN", "LỚP", "NGÀNH", "KHOA", "NIÊN KHÓA"};
             TableModel.setColumnIdentifiers(colsName);
@@ -1623,6 +1846,61 @@ public class frmMain extends javax.swing.JFrame {
             tblAccount.setModel(TableModel);
         }
     }//GEN-LAST:event_cboAccountItemStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        new JOptionPane().showMessageDialog(null, "Bạn nên chọn đăng xuất!");
+    }//GEN-LAST:event_formWindowClosing
+
+    private void mnuCreateNewEventsFromExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreateNewEventsFromExcelActionPerformed
+        this.dalAddEventsFromExcel.setVisible(true);
+        this.dalAddEventsFromExcel.setEnabled(true);
+        this.dalAddEventsFromExcel.setSize(this.dalAddEventsFromExcel.getPreferredSize());
+        this.dalAddEventsFromExcel.setTitle("Thêm danh sách tham gia sự kiện từ file Excel");
+        this.dalAddEventsFromExcel.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("checked.png")));
+    }//GEN-LAST:event_mnuCreateNewEventsFromExcelActionPerformed
+
+    private void btnOpenImportExcel4EventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenImportExcel4EventsActionPerformed
+        this.setVisible(true);
+        this.setEnabled(true);
+        this.dalAddEventsFromExcel.setVisible(false);
+        this.dalAddEventsFromExcel.setEnabled(false);
+        this.fileChooser.showDialog(null, null);
+    }//GEN-LAST:event_btnOpenImportExcel4EventsActionPerformed
+
+    private void btnOpenImportExcel4AccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenImportExcel4AccountActionPerformed
+        this.setVisible(true);
+        this.setEnabled(true);
+        this.dalMakeNewCardFromExcel.setVisible(false);
+        this.dalMakeNewCardFromExcel.setEnabled(false);
+        this.fileChooser.showDialog(null, null);
+    }//GEN-LAST:event_btnOpenImportExcel4AccountActionPerformed
+
+    private void mnuMakeNewCardFromExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMakeNewCardFromExcelActionPerformed
+        this.dalMakeNewCardFromExcel.setVisible(true);
+        this.dalMakeNewCardFromExcel.setEnabled(true);
+        this.dalMakeNewCardFromExcel.setSize(this.dalMakeNewCardFromExcel.getPreferredSize());
+        this.dalMakeNewCardFromExcel.setTitle("Thêm danh sách đăng ký thẻ từ file Excel");
+        this.dalMakeNewCardFromExcel.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("checked.png")));
+    }//GEN-LAST:event_mnuMakeNewCardFromExcelActionPerformed
+
+    private void dalAddEventsFromExcelWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dalAddEventsFromExcelWindowActivated
+        this.setEnabled(false);
+    }//GEN-LAST:event_dalAddEventsFromExcelWindowActivated
+
+    private void dalAddEventsFromExcelWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dalAddEventsFromExcelWindowClosing
+        this.setVisible(true);
+        this.setEnabled(true);
+    }//GEN-LAST:event_dalAddEventsFromExcelWindowClosing
+
+    private void dalMakeNewCardFromExcelWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dalMakeNewCardFromExcelWindowActivated
+        this.setEnabled(false);
+    }//GEN-LAST:event_dalMakeNewCardFromExcelWindowActivated
+
+    private void dalMakeNewCardFromExcelWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dalMakeNewCardFromExcelWindowClosing
+        this.setVisible(true);
+        this.setEnabled(true);
+    }//GEN-LAST:event_dalMakeNewCardFromExcelWindowClosing
 
     /**
      * @param args the command line arguments
@@ -1656,15 +1934,22 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout4Card;
     private javax.swing.JButton btnLogout4Events;
     private javax.swing.JButton btnLogout4Info;
+    private javax.swing.JButton btnOpenImportExcel4Account;
+    private javax.swing.JButton btnOpenImportExcel4Events;
     private javax.swing.JButton btnSaveEvents4Admin;
     private javax.swing.JComboBox<String> cboAccount;
+    private javax.swing.JComboBox<String> cboAccountFromExcel;
     private javax.swing.JComboBox<String> cboCard;
     private javax.swing.JComboBox<String> cboEvents4Checkin;
     private javax.swing.JComboBox<String> cboEvents4ListChecked;
+    private javax.swing.JComboBox<String> cboEventsFromExcel;
     private javax.swing.JComboBox<String> cboSchoolYear;
     private javax.swing.JCheckBox chbTimeIn;
     private javax.swing.JCheckBox chbTimeOut;
+    private javax.swing.JDialog dalAddEventsFromExcel;
     private javax.swing.JDialog dalChangePassword;
+    private javax.swing.JDialog dalMakeNewCardFromExcel;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel lblAddAcount;
     private javax.swing.JLabel lblAddEvents;
     private javax.swing.JLabel lblChangePasswordConfirm;
@@ -1707,6 +1992,12 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblevents4Admin3;
     private javax.swing.JLabel lblevents4Admin4;
     private javax.swing.JLabel lblimgAdmin4Events;
+    private javax.swing.JLabel lbltextAccount0;
+    private javax.swing.JLabel lbltextAccount1;
+    private javax.swing.JLabel lbltextAccount2;
+    private javax.swing.JLabel lbltextEvents0;
+    private javax.swing.JLabel lbltextEvents1;
+    private javax.swing.JLabel lbltextEvents2;
     private javax.swing.JMenu mnuCreateNewEvents;
     private javax.swing.JMenuItem mnuCreateNewEventsFromExcel;
     private javax.swing.JMenu mnuFile;
@@ -1716,11 +2007,13 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuMakeNewCardFromExcel;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlAccount;
+    private javax.swing.JPanel pnlAccountFromExcel;
     private javax.swing.JPanel pnlAdmin;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlCheckin;
     private javax.swing.JPanel pnlCreateNewEvents4Admin;
     private javax.swing.JPanel pnlEvents;
+    private javax.swing.JPanel pnlEventsFromExcel;
     private javax.swing.JPanel pnlInfo4Admin;
     private javax.swing.JPanel pnlInfoAdminLeft;
     private javax.swing.JPanel pnlInfoAdminRight;

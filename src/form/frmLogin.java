@@ -30,17 +30,17 @@ public class frmLogin extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        lblHello1 = new javax.swing.JLabel();
+        lblEmptyLeft = new javax.swing.JLabel();
         lblHello = new javax.swing.JLabel();
-        lblHello2 = new javax.swing.JLabel();
+        lblEmptyRight = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        mnuFile = new javax.swing.JMenu();
+        mnuFileLogout = new javax.swing.JMenuItem();
+        mnuFileExit = new javax.swing.JMenuItem();
+        mnuCreateNewEvents = new javax.swing.JMenu();
+        mnuCreateNewEventsFromExcel = new javax.swing.JMenuItem();
+        mnuMakeNewCard = new javax.swing.JMenu();
+        mnuMakeNewCardFromExcel = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -71,12 +71,12 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        lblHello1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        lblEmptyLeft.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
 
         lblHello.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/admin.png"))); // NOI18N
 
-        lblHello2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        lblEmptyRight.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
 
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
@@ -102,11 +102,11 @@ public class frmLogin extends javax.swing.JFrame {
                                     .addComponent(txtPassword)
                                     .addComponent(txtUsername)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlLoginLayout.createSequentialGroup()
-                                .addComponent(lblHello1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblEmptyLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblHello)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblHello2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblEmptyRight, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(8, 8, 8))))
         );
         pnlLoginLayout.setVerticalGroup(
@@ -114,8 +114,8 @@ public class frmLogin extends javax.swing.JFrame {
             .addGroup(pnlLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHello1)
-                    .addComponent(lblHello2)
+                    .addComponent(lblEmptyLeft)
+                    .addComponent(lblEmptyRight)
                     .addComponent(lblHello))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -138,36 +138,51 @@ public class frmLogin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 6, 6);
         getContentPane().add(pnlLogin, gridBagConstraints);
 
-        jMenu1.setText("Tùy chọn");
-        jMenu1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuFile.setText("Tùy chọn");
+        mnuFile.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuFile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuFileMouseClicked(evt);
+            }
+        });
 
-        jMenuItem1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jMenuItem1.setText("Đăng xuất");
-        jMenu1.add(jMenuItem1);
+        mnuFileLogout.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuFileLogout.setText("Đăng xuất");
+        mnuFile.add(mnuFileLogout);
 
-        jMenuItem3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jMenuItem3.setText("Thoát");
-        jMenu1.add(jMenuItem3);
+        mnuFileExit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuFileExit.setText("Thoát");
+        mnuFile.add(mnuFileExit);
 
-        MenuBar.add(jMenu1);
+        MenuBar.add(mnuFile);
 
-        jMenu2.setText("Tạo mới sự kiện");
-        jMenu2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuCreateNewEvents.setText("Sự kiện");
+        mnuCreateNewEvents.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuCreateNewEvents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuCreateNewEventsMouseClicked(evt);
+            }
+        });
 
-        jMenuItem2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jMenuItem2.setText("Thêm sự kiện từ danh sách Excel");
-        jMenu2.add(jMenuItem2);
+        mnuCreateNewEventsFromExcel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuCreateNewEventsFromExcel.setText("Thêm danh sách tham gia sự kiện từ file Excel");
+        mnuCreateNewEvents.add(mnuCreateNewEventsFromExcel);
 
-        MenuBar.add(jMenu2);
+        MenuBar.add(mnuCreateNewEvents);
 
-        jMenu3.setText("Đăng ký thẻ");
-        jMenu3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuMakeNewCard.setText("Đăng ký thẻ mới");
+        mnuMakeNewCard.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuMakeNewCard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuMakeNewCardMouseClicked(evt);
+            }
+        });
 
-        jMenuItem5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jMenuItem5.setText("Đăng ký thẻ từ danh sách Excel");
-        jMenu3.add(jMenuItem5);
+        mnuMakeNewCardFromExcel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuMakeNewCardFromExcel.setText("Thêm danh sách đăng ký thẻ từ file Excel");
+        mnuMakeNewCard.add(mnuMakeNewCardFromExcel);
 
-        MenuBar.add(jMenu3);
+        MenuBar.add(mnuMakeNewCard);
 
         setJMenuBar(MenuBar);
 
@@ -177,6 +192,10 @@ public class frmLogin extends javax.swing.JFrame {
     public void onRun() {
         this.setEnabled(true);
         this.setVisible(true);
+        this.mnuFileExit.setEnabled(false);
+        this.mnuFileLogout.setEnabled(false);
+        this.mnuCreateNewEventsFromExcel.setEnabled(false);
+        this.mnuMakeNewCardFromExcel.setEnabled(false);
         setTitle("ĐỒ ÁN ĐIỂM DANH");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("checked.png")));
     }
@@ -188,6 +207,10 @@ public class frmLogin extends javax.swing.JFrame {
 
     public void onStop() {
         this.dispose();
+    }
+
+    public void notice() {
+        new JOptionPane().showMessageDialog(null, "Bạn chưa đăng nhập!");
     }
 
     public void onGoto() {
@@ -218,6 +241,18 @@ public class frmLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void mnuFileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuFileMouseClicked
+        notice();
+    }//GEN-LAST:event_mnuFileMouseClicked
+
+    private void mnuCreateNewEventsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuCreateNewEventsMouseClicked
+        notice();
+    }//GEN-LAST:event_mnuCreateNewEventsMouseClicked
+
+    private void mnuMakeNewCardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMakeNewCardMouseClicked
+        notice();
+    }//GEN-LAST:event_mnuMakeNewCardMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -239,18 +274,18 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JLabel lblEmptyLeft;
+    private javax.swing.JLabel lblEmptyRight;
     private javax.swing.JLabel lblHello;
-    private javax.swing.JLabel lblHello1;
-    private javax.swing.JLabel lblHello2;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JMenu mnuCreateNewEvents;
+    private javax.swing.JMenuItem mnuCreateNewEventsFromExcel;
+    private javax.swing.JMenu mnuFile;
+    private javax.swing.JMenuItem mnuFileExit;
+    private javax.swing.JMenuItem mnuFileLogout;
+    private javax.swing.JMenu mnuMakeNewCard;
+    private javax.swing.JMenuItem mnuMakeNewCardFromExcel;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
