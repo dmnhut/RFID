@@ -2,9 +2,10 @@ package form;
 
 import com.alee.laf.WebLookAndFeel;
 import java.awt.Toolkit;
-import javafx.stage.FileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Employer;
+import model.Student;
 import model.User;
 
 /**
@@ -172,7 +173,7 @@ public class frmMain extends javax.swing.JFrame {
         txtStudentCardCollege = new javax.swing.JTextField();
         lblcard4Student6 = new javax.swing.JLabel();
         cboSchoolYear = new javax.swing.JComboBox<>();
-        btnAddNewStudent1 = new javax.swing.JButton();
+        btnAddNewStudent = new javax.swing.JButton();
         btnCancelStudent = new javax.swing.JButton();
         pnlSubEmployer4NewCard = new javax.swing.JPanel();
         lblcard4Employer0 = new javax.swing.JLabel();
@@ -1227,7 +1228,12 @@ public class frmMain extends javax.swing.JFrame {
 
         cboSchoolYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014 - 2018", "2015 - 2019", "2016 - 2020", "2017 - 2021" }));
 
-        btnAddNewStudent1.setText("Lưu");
+        btnAddNewStudent.setText("Lưu");
+        btnAddNewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewStudentActionPerformed(evt);
+            }
+        });
 
         btnCancelStudent.setText("Hủy");
         btnCancelStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -1265,7 +1271,7 @@ public class frmMain extends javax.swing.JFrame {
                             .addComponent(cboSchoolYear, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSubStudent4NewCardLayout.createSequentialGroup()
-                        .addComponent(btnAddNewStudent1)
+                        .addComponent(btnAddNewStudent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelStudent)))
                 .addContainerGap())
@@ -1304,7 +1310,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(pnlSubStudent4NewCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelStudent)
-                    .addComponent(btnAddNewStudent1))
+                    .addComponent(btnAddNewStudent))
                 .addContainerGap())
         );
 
@@ -1339,6 +1345,11 @@ public class frmMain extends javax.swing.JFrame {
         txtEmployerCardDepartment.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         btnAddNewEmployer.setText("Lưu");
+        btnAddNewEmployer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewEmployerActionPerformed(evt);
+            }
+        });
 
         btnCancelEmployer.setText("Hủy");
         btnCancelEmployer.addActionListener(new java.awt.event.ActionListener() {
@@ -1700,6 +1711,11 @@ public class frmMain extends javax.swing.JFrame {
             }
             // pnl_Account: Quản lý tài khoản
             case 3: {
+                if (cboAccount.getSelectedItem().toString().equals(cboAccount.getItemAt(0))) {
+                    Student.listen2Update(tblAccount, "");
+                } else {
+                    Employer.listen2Update(tblAccount, "");
+                }
                 break;
             }
             // pnl_Admin: Quản trị
@@ -1713,7 +1729,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_tabbedPaneMainStateChanged
 
     public boolean tryChangePassword() {
-        if (txtOldPassword.getText().equals(model.User.password) && txtNewPassword.getText().equals(txtChangePasswordRepeat.getText())) {
+        if (model.Regex.check_Password(txtNewPassword.getText()) && txtOldPassword.getText().equals(model.User.password) && txtNewPassword.getText().equals(txtChangePasswordRepeat.getText())) {
             model.Login changePassword = new model.Login(model.User.username, model.User.password);
             changePassword.changePassword(txtNewPassword.getText());
             return true;
@@ -1810,12 +1826,13 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelEmployerActionPerformed
 
     private void cboCardItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCardItemStateChanged
-        if (evt.getItem().toString() == cboCard.getItemAt(1).toString()) {
+        if (evt.getItem().toString().equals(cboCard.getItemAt(1))) {
             resetTextStudent();
             this.pnlSubEmployer4NewCard.setVisible(true);
             this.pnlSubEmployer4NewCard.setEnabled(true);
             this.pnlSubStudent4NewCard.setVisible(false);
             this.pnlSubStudent4NewCard.setEnabled(false);
+            this.cboAccount.setSelectedIndex(this.cboCard.getSelectedIndex());
         } else {
             resetTextEmployer();
             this.pnlSubEmployer4NewCard.setVisible(false);
@@ -1832,18 +1849,10 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAddAcountMouseClicked
 
     private void cboAccountItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboAccountItemStateChanged
-        if (evt.getItem().toString() == cboAccount.getItemAt(1).toString()) {
-            TableModel = new DefaultTableModel();
-            String[] colsName = {"MÃ SỐ", "HỌ VÀ TÊN", "EMAIL", "BỘ MÔN/ TỔ", "KHOA/ PHÒNG"};
-            TableModel.setColumnIdentifiers(colsName);
-            TableModel.setNumRows(10);
-            tblAccount.setModel(TableModel);
+        if (evt.getItem().toString().equals(cboAccount.getItemAt(0))) {
+            Student.listen2Update(tblAccount, "");
         } else {
-            TableModel = new DefaultTableModel();
-            String[] colsName = {"MÃ SỐ", "HỌ VÀ TÊN", "LỚP", "NGÀNH", "KHOA", "NIÊN KHÓA"};
-            TableModel.setColumnIdentifiers(colsName);
-            TableModel.setNumRows(10);
-            tblAccount.setModel(TableModel);
+            Employer.listen2Update(tblAccount, "");
         }
     }//GEN-LAST:event_cboAccountItemStateChanged
 
@@ -1902,6 +1911,27 @@ public class frmMain extends javax.swing.JFrame {
         this.setEnabled(true);
     }//GEN-LAST:event_dalMakeNewCardFromExcelWindowClosing
 
+    private void btnAddNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewStudentActionPerformed
+        Student newStudent = new Student(txtStudentCardRFID.getText(), txtStudentCardCodeID.getText(), txtStudentCardName.getText(), txtStudentCardClass.getText(), txtStudentCardMajors.getText(), txtStudentCardCollege.getText(), cboSchoolYear.getSelectedItem().toString());
+        if (newStudent.themTaiKhoan()) {
+            new JOptionPane().showMessageDialog(null, "Thêm thành công sinh viên. Chúc mừng bạn. Bạn thật là may mắn!");
+        } else {
+            new JOptionPane().showMessageDialog(null, "Việc thêm mới thất bại!");
+            System.out.println("LỖI KHI THÊM MỚI SINH SIÊN");
+        }
+
+    }//GEN-LAST:event_btnAddNewStudentActionPerformed
+
+    private void btnAddNewEmployerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewEmployerActionPerformed
+        Employer newEmployer = new Employer(txtEmployerCardRFID.getText(), txtEmployerCardCodeID.getText(), txtEmployerCardName.getText(), txtEmployerCardEmail.getText(), txtEmployerCardSet.getText(), txtEmployerCardDepartment.getText());
+        if (newEmployer.themTaiKhoan()) {
+            new JOptionPane().showMessageDialog(null, "Chúc mừng");
+        }else{
+            new JOptionPane().showMessageDialog(null, "Việc thêm mới thất bại!");
+            System.out.println("LỖI KHI THÊM MỚI CÁN BỘ");
+        }
+    }//GEN-LAST:event_btnAddNewEmployerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1922,7 +1952,7 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JButton btnAddNewEmployer;
-    private javax.swing.JButton btnAddNewStudent1;
+    private javax.swing.JButton btnAddNewStudent;
     private javax.swing.JButton btnCancelEmployer;
     private javax.swing.JButton btnCancelEvents4Admin;
     private javax.swing.JButton btnCancelStudent;

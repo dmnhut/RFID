@@ -1795,7 +1795,7 @@
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="btnAddNewStudent1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnAddNewStudent" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="btnCancelStudent" min="-2" max="-2" attributes="0"/>
                                               </Group>
@@ -1845,7 +1845,7 @@
                                           <EmptySpace pref="12" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="btnCancelStudent" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnAddNewStudent1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnAddNewStudent" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
@@ -1966,10 +1966,13 @@
                                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                                   </AuxValues>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="btnAddNewStudent1">
+                                <Component class="javax.swing.JButton" name="btnAddNewStudent">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddNewStudentActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Component class="javax.swing.JButton" name="btnCancelStudent">
                                   <Properties>
@@ -2169,6 +2172,9 @@
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddNewEmployerActionPerformed"/>
+                                  </Events>
                                 </Component>
                                 <Component class="javax.swing.JButton" name="btnCancelEmployer">
                                   <Properties>

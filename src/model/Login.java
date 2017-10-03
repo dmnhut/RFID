@@ -94,14 +94,14 @@ public class Login {
     // qua tra ve true
     public boolean logFile(boolean checkLogin) {
         // duong dan de luu file logFile
-        String pathName = "C:\\CHECKIN-demo\\Login";
+        String pathName = "C:\\Diem Danh";
         File file = new File(pathName);
         // kiem tra thu muc co ton tai chua,neu chua thi tao thu muc
         if (!file.isDirectory()) {
             file.mkdirs();
         }
         // kiem tra tao tin co ton tai chua, neu chua thi tao tap tin
-        pathName = "C:\\CHECKIN-demo\\Login\\logFile";
+        pathName = "C:\\Diem Danh\\LogFile";
         file = new File(pathName);
         if (!file.exists()) {
             try {
@@ -138,7 +138,7 @@ public class Login {
         login.setUsername("root");
         login.addAccount();
         login.setCodeID("001");
-        login.setFullname("Doan Minh Nhut");
+        login.setFullname("Admin");
         login.setPassword("admin");
         login.setUsername("admin");
         login.addAccount();
