@@ -2,6 +2,7 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,13 +26,29 @@ public class Employer extends Account {
     
     // them tai khoan vao csdl, neu them thanh cong tra ve true
     public boolean themTaiKhoan() {
-        if(this.RFID.matches("") || this.MASOID.matches("") || this.name.matches("") || !Regex.check_Email(this.email) || this.boMon_To.matches("") || this.khoa_Phong.matches("")){
+        if (!(model.Regex.check_Number(this.RFID)&&model.Regex.check_Maso(this.MASOID)&&model.Regex.check_txtNotNULL(this.name)&&model.Regex.check_txtNotNULL(this.boMon_To)&&model.Regex.check_Email(this.email)&&model.Regex.check_txtNotNULL(this.khoa_Phong))) {
+            String str = "Bạn cần điền đầy đủ tất cả các thông tin";
+            if (!model.Regex.check_Email(this.email)) {
+                str = "Định dạng email chưa đúng";
+            }
+            if (!model.Regex.check_Maso(this.MASOID)) {
+                str = "Định dạng Mã số chưa đúng";
+            }
+            if (!model.Regex.check_Number(this.RFID)) {
+                str = "Định dạng RFID chưa đúng";
+            }
+            JOptionPane.showMessageDialog(null, str);
+            return false;
+        }
+        if(this.refresh()){
+            JOptionPane.showMessageDialog(null, "Tài khoản đã tồn tại");
             return false;
         }
         super.themTaiKhoan();
         ConnectToSql sql = new ConnectToSql();
         String insert = "INSERT INTO EMPLOYER VALUES('" + this.RFID + "','" + this.MASOID + "','" + this.name + "','"
                 + this.email + "','" + this.boMon_To + "','" + this.khoa_Phong + "')";
+        
         return ConnectToSql.update(insert);
     }
 
@@ -51,26 +68,64 @@ public class Employer extends Account {
         return ConnectToSql.update(delete);
     }
 
+    public static void deleteEmployer(JTable tbl) {
+        try {
+            int r = tbl.getSelectedRow();
+            Object id = form.frmMain.TableModel.getValueAt(r, 0);
+            String sql = "DELETE FROM CHECKIN.dbo.ACCOUNT WHERE RFID='" + id + "'";
+            ConnectToSql.update(sql);
+            sql = "DELETE FROM CHECKIN.dbo.EMPLOYER WHERE RFID='" + id + "'";
+            ConnectToSql.update(sql);
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+    
+    public static void edit2SaveEmployer(JTable tbl) {
+        try {
+            for (int i = 0; i < tbl.getRowCount(); i++) {
+                Object RFID = form.frmMain.TableModel.getValueAt(i, 0);
+                Object codeID = form.frmMain.TableModel.getValueAt(i, 1);
+                Object fullName = form.frmMain.TableModel.getValueAt(i, 2);
+                Object email = form.frmMain.TableModel.getValueAt(i, 3);
+                Object gender = form.frmMain.TableModel.getValueAt(i, 4);
+                Object department = form.frmMain.TableModel.getValueAt(i, 5);
+                String sql = "UPDATE  CHECKIN.dbo.EMPLOYER SET RFID = '" + RFID.toString() +"',codeID = '" + codeID.toString() + 
+                        "', fullName = N'" + fullName + "', email = '" + email+ "', gender = N'" + gender+ "', department = N'" + department+
+                        "' WHERE RFID = '" + RFID + "' or codeID='"+codeID.toString()+"'";
+                ConnectToSql.update(sql);
+                sql = "UPDATE  CHECKIN.dbo.ACCOUNT   SET RFID = '" + RFID.toString() +"',codeID = '" + codeID.toString() + 
+                        "', fullName = N'" + fullName +
+                        "' WHERE RFID = '" + RFID + "' or codeID='"+codeID.toString()+"'";
+                ConnectToSql.update(sql);
+                
+            }
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+    
     public static void listen2Update(JTable tbl, String where) {
         try {
             form.frmMain.TableModel = new DefaultTableModel();
-            String[] colsName = {"MÃ SỐ", "HỌ VÀ TÊN", "EMAIL", "BỘ MÔN/ TỔ", "KHOA/ PHÒNG"};
+            String[] colsName = {"RFID","MÃ SỐ", "HỌ VÀ TÊN", "EMAIL", "BỘ MÔN/ TỔ", "KHOA/ PHÒNG"};
             form.frmMain.TableModel.setColumnIdentifiers(colsName);
             tbl.setModel(form.frmMain.TableModel);
             String sql = "SELECT * FROM EMPLOYER" + where;
-            System.out.println(sql);
+            
             ResultSet rs = model.ConnectToSql.select(sql);
             while (rs.next()) {
-                Object rows[] = new Object[5];
+                Object rows[] = new Object[6];
                 rows[0] = rs.getString(1);
                 rows[1] = rs.getString(2);
                 rows[2] = rs.getString(3);
                 rows[3] = rs.getString(4);
                 rows[4] = rs.getString(5);
+                rows[5] = rs.getString(6);
                 form.frmMain.TableModel.addRow(rows);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        //    e.printStackTrace();
         }
     }
     

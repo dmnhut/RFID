@@ -22,7 +22,7 @@ public class MD5 {
             result = bigInteger.toString(16);
         } catch (NoSuchAlgorithmException e) {
             // e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "MD5: error 18");
+            //JOptionPane.showMessageDialog(null, "MD5: error 18");
         }
         return result;
     }

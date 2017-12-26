@@ -61,7 +61,7 @@ public class Login {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
 
         }
         return false;
@@ -94,20 +94,20 @@ public class Login {
     // qua tra ve true
     public boolean logFile(boolean checkLogin) {
         // duong dan de luu file logFile
-        String pathName = "C:\\Diem Danh";
+        String pathName = "C:\\RFID";
         File file = new File(pathName);
         // kiem tra thu muc co ton tai chua,neu chua thi tao thu muc
         if (!file.isDirectory()) {
             file.mkdirs();
         }
         // kiem tra tao tin co ton tai chua, neu chua thi tao tap tin
-        pathName = "C:\\Diem Danh\\LogFile";
+        pathName = "C:\\RFID\\LogFile";
         file = new File(pathName);
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 return false;
             }
         }
@@ -125,22 +125,8 @@ public class Login {
             fr.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        Login login = new Login("", "");
-        login.setCodeID("000");
-        login.setFullname("root");
-        login.setPassword("root");
-        login.setUsername("root");
-        login.addAccount();
-        login.setCodeID("001");
-        login.setFullname("Admin");
-        login.setPassword("admin");
-        login.setUsername("admin");
-        login.addAccount();
     }
 }

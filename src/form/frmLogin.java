@@ -1,6 +1,7 @@
 package form;
 
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -62,6 +63,11 @@ public class frmLogin extends javax.swing.JFrame {
         txtPassword.setBackground(new java.awt.Color(238, 238, 239));
         txtPassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtPassword.setBorder(null);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(120, 130, 224));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -222,7 +228,7 @@ public class frmLogin extends javax.swing.JFrame {
         this.mnuFileLogout.setEnabled(false);
         this.mnuCreateNewEventsFromExcel.setEnabled(false);
         this.mnuMakeNewCardFromExcel.setEnabled(false);
-        setTitle("ĐỒ ÁN ĐIỂM DANH");
+        setTitle("ĐIỂM DANH");
         getContentPane().setBackground(new java.awt.Color(254, 254, 254));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("checked.png")));
         this.setLocationRelativeTo(null);
@@ -257,8 +263,8 @@ public class frmLogin extends javax.swing.JFrame {
         if (log.checkLogin()) {
             setupUser(log);
             log.logFile(true);
-            onPause();
             onGoto();
+            onPause();
             onStop();
         } else {
             new JOptionPane().showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng");
@@ -280,6 +286,21 @@ public class frmLogin extends javax.swing.JFrame {
     private void mnuMakeNewCardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMakeNewCardMouseClicked
         notice();
     }//GEN-LAST:event_mnuMakeNewCardMouseClicked
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            model.Login log = new model.Login(txtUsername.getText(), txtPassword.getText());
+            if (log.checkLogin()) {
+                setupUser(log);
+                log.logFile(true);
+                onGoto();
+                onPause();
+                onStop();
+            } else {
+                new JOptionPane().showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng");
+            }
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments

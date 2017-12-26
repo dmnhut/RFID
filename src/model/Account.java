@@ -11,9 +11,9 @@ package model;
  */
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class Account {
-
     protected String RFID;
     protected String MASOID;
     protected String name;
@@ -40,13 +40,13 @@ public class Account {
     }
 
     public boolean themTaiKhoan() {
-        String insert = "INSERT INTO ACCOUNT VALUES('" + this.RFID + "','" + this.MASOID + "','" + this.name + "')";
+        String insert = "INSERT INTO ACCOUNT VALUES('" + this.RFID + "','" + this.MASOID + "',N'" + this.name + "')";
         return ConnectToSql.update(insert);
     }
 
     // sua co so du lieu trong csdl, neu thanh cong tra ve true
     public boolean suaTaiKhoan() {
-        String update = "UPDATE ACCOUNT set MASOID='" + this.MASOID + "',name='" + this.name + "' WHERE RFID='"
+        String update = "UPDATE ACCOUNT set MASOID='" + this.MASOID + "N',name='" + this.name + "' WHERE RFID='"
                 + this.RFID + "'";
         return ConnectToSql.update(update);
     }
@@ -57,24 +57,49 @@ public class Account {
         return ConnectToSql.update(delete);
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean refresh() {
+        String select = "SELECT * FROM CHECKIN.dbo.ACCOUNT WHERE RFID='" + this.RFID + "' or codeID='" + this.RFID + "' or RFID='" + this.MASOID + "' or codeID='" + this.MASOID + "'";
+        System.out.println(select);
+        ResultSet rs = model.ConnectToSql.select(select);
+        try {
+            while (rs.next()) {
+                this.RFID = rs.getString(1);
+                this.MASOID = rs.getString(2);
+                this.name = rs.getString(3);
+                return true;
+            }
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            //JOptionPane.showMessageDialog(null, "Eror:73 from class Account");
+        }
+        return false;
+    }
+
     // ham refresh tu csdl theo RFID de load lay cac gia tri
     public boolean refresh_RFID() {
-        String select = "SELECT * FROM ACCOUNT WHERE RFID='" + this.RFID + "'";
-        ResultSet rs = ConnectToSql.select(select);
+        String select = "SELECT * FROM CHECKIN.dbo.ACCOUNT WHERE RFID='" + this.RFID + "'";
+        ResultSet rs = model.ConnectToSql.select(select);
         try {
-            this.RFID = rs.getString(0);
-            this.MASOID = rs.getString(1);
-            this.name = rs.getString(2);
-            return true;
+            while (rs.next()) {
+                this.RFID = rs.getString(1);
+                this.MASOID = rs.getString(2);
+                this.name = rs.getString(3);
+                return true;
+            }
         } catch (SQLException e) {
-            // e.printStackTrace();
-            return false;
+            //e.printStackTrace();
+            //JOptionPane.showMessageDialog(null, "Eror:73 from class Account");
         }
+        return false;
     }
 
     // ham refresh tu csdl theo MASOID de load lay cac gia tri
     public boolean refresh_MASOID() {
-        String select = "SELECT * FROM ACCOUNT WHERE RFID='" + this.MASOID + "'";
+        String select = "SELECT * FROM CHECKIN.dbo.ACCOUNT WHERE RFID='" + this.MASOID + "'";
         ResultSet rs = ConnectToSql.select(select);
         try {
             this.RFID = rs.getString(0);

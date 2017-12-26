@@ -15,13 +15,15 @@ public class ConnectToSql {
     public static ResultSet select(String sql) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            con = DriverManager.getConnection("jdbc:sqlserver://WORKSPACE\\Dev:1433;databaseName=CHECKIN" + ";integratedSecurity=true");
+            //String pathNameSQL = model.FileIO.readPathNameSQL();
+            //System.out.println(pathNameSQL);
+            con = DriverManager.getConnection("jdbc:sqlserver://" + "WORKSPACE\\SQLEXPRESS" + ":1433;databaseName=CHECKIN;integratedSecurity=true");
             java.sql.Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(sql);
             System.out.println(sql);
             return rs;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
@@ -30,13 +32,13 @@ public class ConnectToSql {
         boolean flag = false;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            con = DriverManager.getConnection("jdbc:sqlserver://WORKSPACE\\Dev:1433;databaseName=CHECKIN" + ";integratedSecurity=true");
+            con = DriverManager.getConnection("jdbc:sqlserver://" + "WORKSPACE\\SQLEXPRESS" + ":1433;databaseName=CHECKIN;integratedSecurity=true");
             java.sql.Statement s = con.createStatement();
             s.executeUpdate(sql);
             System.out.println(sql);
             flag = !flag;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return flag;
     }
